@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:Arial;
+            background: linear-gradient(135deg,#4facfe,#00f2fe);
+        }
+
+        /* 登录卡片 */
+        .login-box{
+            width:320px;
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h2{
+            margin-bottom:25px;
+        }
+
+        /* 输入框 */
+        input{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+            border-radius:6px;
+            border:1px solid #ddd;
+            font-size:14px;
+        }
+
+        /* 按钮 */
+        button{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        /* 登录按钮 */
+        .login-btn{
+            background:#4facfe;
+            color:white;
+        }
+        /* 注册按钮 */
+        .register-btn{
+            background:#eee;
+        }
+
+        /* 按钮悬停 */
+        button:hover{
+            opacity:0.9;
+        }
+
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h2>student sys</h2>
+    <input id="username" placeholder="username" value="admin">
+    <input id="password" placeholder="password" type="password" value="123456">
+    <button class="login-btn" onclick="doLogin()">Login</button>
+    <button class="register-btn" onclick="goRegister()">register</button>
+</div>
+<script>
+    function doLogin(){
+        $.post("/api/login",{
+            username: $("#username").val(),
+            password: $("#password").val()
+        },function(res){
+            if(res.success){
+                alert("logged in successfully!"+res.role);
+                location.href="/index.html";
+            }else {
+                alert(res.msg);
+            }
+        });
+    }
+    function goRegister(){
+        location.href="/register.html";
+    }
+</script>
+</body>
+</html>
